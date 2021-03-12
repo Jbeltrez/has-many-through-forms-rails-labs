@@ -1,10 +1,10 @@
 <%= @post.title %><br> 
 <%= @post.content %><br> 
 
-<% @post.comments.each do |c| %>
-<% user = User.find(c.user_id) %> 
+<% @post.comments.each do |a| %>
+<% user = User.find(a.user_id) %> 
 <%= user.username %> says: 
-<%= c.content %> 
+<%= a.content %> 
 <% end %> 
 
 
@@ -13,5 +13,9 @@
 <%= f.label :content %>
 <%= f.text_area :content %>
 <%= f.collection_select :user_id, User.all, :id, :username %>  
+<%= f.fields_for :user, User.new do |u| %> 
+    <%= u.label :username %> 
+    <%= u.text_field :username %> 
+    <% end %>
 <%= f.submit %> 
 <% end %> 
