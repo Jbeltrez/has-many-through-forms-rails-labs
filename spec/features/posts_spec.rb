@@ -15,6 +15,7 @@ describe 'Posts', type: 'feature' do
       click_button('Create Post')
       @categories = Post.last.categories
       expect(@categories).to be_empty
+      # byebug 
       expect(page).to have_content('Feeling Awesome')
     end
 
