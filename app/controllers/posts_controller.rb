@@ -13,9 +13,19 @@ class PostsController < ApplicationController
   end
 
   def create
-    # byebug 
-    post = Post.create(post_params)
-    redirect_to post_path(post)
+    byebug 
+    if post_params.values.any?.blank?
+      byebug 
+      def post_params
+        params.require(:post).permit(:title, :content, category_ids:[])
+      end
+      post = Post.create(post_params)
+      redirect_to post_path(post)
+    else 
+      post = Post.create(post_params)
+      redirect_to post_path(post)
+    end
+    
   end
 
   private
